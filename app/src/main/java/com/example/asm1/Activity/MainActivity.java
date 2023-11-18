@@ -14,8 +14,10 @@ import android.widget.TextView;
 import com.example.asm1.Interface.IIngredient;
 import com.example.asm1.Interface.IObserverUser;
 import com.example.asm1.R;
+import com.example.asm1.model.CreateCardViewHelper;
 import com.example.asm1.model.ImageHelper;
 import com.example.asm1.model.Ingredient.Ingredient;
+import com.example.asm1.model.Ingredient.withGuideAndAmount;
 import com.example.asm1.model.Recipe;
 import com.example.asm1.model.UserSingleton;
 
@@ -45,10 +47,14 @@ public class MainActivity extends AppCompatActivity implements IObserverUser {
         Ingredient ingredient2 = new Ingredient("Egg", 50, "Egg", "meat");
         Ingredient ingredient4 = new Ingredient("Tomato", 50, "Tomato", "vegetable");
 
-        Recipe recipe1 = new Recipe("Bread with Egg", "Bread with Egg", 150, "breakfast");
-        recipe1.addIngredient(ingredient1);
-        recipe1.addIngredient(ingredient2);
-        recipe1.addIngredient(ingredient4);
+        withGuideAndAmount ingredient_with_guide_and_amount1 = new withGuideAndAmount(ingredient1, "g", 100);
+        withGuideAndAmount ingredient_with_guide_and_amount2 = new withGuideAndAmount(ingredient2, "g", 50);
+        withGuideAndAmount ingredient_with_guide_and_amount4 = new withGuideAndAmount(ingredient4, "g", 50);
+
+        Recipe recipe1 = new Recipe("Bread with Egg", "breakfast");
+        recipe1.addIngredient(ingredient_with_guide_and_amount1);
+        recipe1.addIngredient(ingredient_with_guide_and_amount2);
+        recipe1.addIngredient(ingredient_with_guide_and_amount4);
 
         recipes.add(recipe1);
         recipes.add(recipe1);
@@ -57,8 +63,8 @@ public class MainActivity extends AppCompatActivity implements IObserverUser {
         ingredients.add(ingredient1);
         ingredients.add(ingredient2);
         ingredients.add(ingredient4);
-        recipe_container = findViewById(R.id.recipe_container);
-        ingredient_container = findViewById(R.id.ingredient_container);
+        recipe_container = findViewById(R.id.main_recipe_container);
+        ingredient_container = findViewById(R.id.main_ingredient_container);
         renderView(recipes, ingredients);
         //Button to ingredient list
         toIngredientsList.setOnClickListener(new View.OnClickListener() {
@@ -81,45 +87,31 @@ public class MainActivity extends AppCompatActivity implements IObserverUser {
 
     @Override
     public void update() {
-        Log.d(TAG, "update: ");
         recipes = UserSingleton.getInstance().getRecipes();
         ingredients = UserSingleton.getInstance().getIngredients();
         renderView(recipes, ingredients);
+        Log.d(TAG, "update: " + recipes.size());
+        Log.d(TAG, "update: " + ingredients.size());
     }
-    private void renderView(ArrayList<Recipe> recipes, ArrayList<IIngredient> ingredients){
+    private void renderView(ArrayList<Recipe> recipes, ArrayList<IIngredient> ingredients) {
+        renderRecipeViews(recipes);
+        renderIngredientViews(ingredients);
+    }
+
+    private void renderRecipeViews(ArrayList<Recipe> recipes) {
         recipe_container.removeAllViews();
-        ingredient_container.removeAllViews();
         for (Recipe recipe : recipes) {
-            View recipeView = createRecipeCardView(recipe);
+            View recipeView = CreateCardViewHelper.createBaseRecipeCardView(this,recipe);
             recipe_container.addView(recipeView);
         }
+    }
+
+    private void renderIngredientViews(ArrayList<IIngredient> ingredients) {
+        ingredient_container.removeAllViews();
         for (IIngredient ingredient : ingredients) {
-            View ingredientView = createIngredientCardView(ingredient);
+            View ingredientView = CreateCardViewHelper.createBaseIngredientCardView(this,ingredient);
             ingredient_container.addView(ingredientView);
         }
+    }
 
-    }
-    private View createRecipeCardView(Recipe recipe) {
-        View recipeView = getLayoutInflater().inflate(R.layout.card, null);
-        TextView recipeName = recipeView.findViewById(R.id.card_name);
-        TextView recipeDescription = recipeView.findViewById(R.id.card_desc);
-        TextView recipeCalories = recipeView.findViewById(R.id.card_calories);
-        ImageView recipeImage = recipeView.findViewById(R.id.card_image);
-        ImageHelper.setImageToView(recipe.getType(), recipeImage);
-        recipeName.setText(recipe.getName());
-        recipeDescription.setText(recipe.getDescription());
-        recipeCalories.setText(String.valueOf(recipe.getCalories()));
-        return recipeView;
-    }
-    private View createIngredientCardView(IIngredient ingredient) {
-        View ingredientView = getLayoutInflater().inflate(R.layout.card, null);
-        TextView ingredientName = ingredientView.findViewById(R.id.card_name);
-        TextView ingredientDescription = ingredientView.findViewById(R.id.card_desc);
-        TextView ingredientCalories = ingredientView.findViewById(R.id.card_calories);
-        ImageHelper.setImageToView(ingredient.getImg(), ingredientView.findViewById(R.id.card_image));
-        ingredientName.setText(ingredient.getName());
-        ingredientDescription.setText(ingredient.getDescription());
-        ingredientCalories.setText(String.valueOf(ingredient.getCalories()));
-        return ingredientView;
-    }
 }

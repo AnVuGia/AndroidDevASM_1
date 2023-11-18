@@ -25,12 +25,21 @@ public class UserSingleton implements IObservableUser {
     }
     public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
+        notifyObservers();
+    }
+    public void removeRecipe(Recipe recipe) {
+        recipes.remove(recipe);
+        notifyObservers();
     }
     public ArrayList<IIngredient> getIngredients() {
         return ingredients;
     }
     public void addIngredient(IIngredient ingredient) {
         ingredients.add(ingredient);
+        notifyObservers();
+    }
+    public void removeIngredient(IIngredient ingredient) {
+        ingredients.remove(ingredient);
         notifyObservers();
     }
 

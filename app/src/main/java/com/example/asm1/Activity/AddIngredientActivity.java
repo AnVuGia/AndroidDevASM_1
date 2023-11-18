@@ -1,5 +1,6 @@
 package com.example.asm1.Activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -20,6 +21,11 @@ public class AddIngredientActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ingredient);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Add Ingredient");
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         flour_button = findViewById(R.id.flour_button);
         meat_button = findViewById(R.id.meat_button);
         vegetable_button = findViewById(R.id.vegetable_button);
@@ -98,5 +104,10 @@ public class AddIngredientActivity extends AppCompatActivity {
         if (!isClicked[0] && !isClicked[1] && !isClicked[2]) {
             ingredient_name.setError("Please choose ingredient image");
         }
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

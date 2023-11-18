@@ -2,19 +2,16 @@ package com.example.asm1.model;
 
 import com.example.asm1.Interface.IIngredient;
 import com.example.asm1.model.Ingredient.Ingredient;
+import com.example.asm1.model.Ingredient.withGuideAndAmount;
 
 import java.util.ArrayList;
 
 public class Recipe {
     private ArrayList<IIngredient> ingredients = new ArrayList<>();
     private String name;
-    private String description;
-    private int calories;
     private String type;
-    public Recipe(String name, String description, int calories, String type) {
+    public Recipe(String name, String type) {
         this.name = name;
-        this.description = description;
-        this.calories = calories;
         this.type = type;
     }
 
@@ -26,7 +23,7 @@ public class Recipe {
         this.type = type;
     }
 
-    public void addIngredient(Ingredient ingredient) {
+    public void addIngredient(IIngredient ingredient) {
         ingredients.add(ingredient);
     }
     //Getter and Setter
@@ -47,18 +44,23 @@ public class Recipe {
     }
 
     public String getDescription() {
-        return description;
+                String description = "";
+                for(IIngredient ingredient : ingredients) {
+                    withGuideAndAmount temp = (withGuideAndAmount) ingredient;
+                    description += temp.getName() + " " + temp.getAmount() + " " + temp.getGuide() + "\n";
+                }
+                return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public int getCalories() {
-        return calories;
+            int totalCalories = 0;
+            for(IIngredient ingredient : ingredients) {
+                withGuideAndAmount temp = (withGuideAndAmount) ingredient;
+                totalCalories += temp.getCalories() *  temp.getAmount() / 100;
+            }
+            return totalCalories;
     }
 
-    public void setCalories(int calories) {
-        this.calories = calories;
-    }
+
 }

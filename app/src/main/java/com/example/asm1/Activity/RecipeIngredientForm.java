@@ -1,5 +1,6 @@
 package com.example.asm1.Activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -29,6 +30,11 @@ public class RecipeIngredientForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_ingredient_form);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Add Ingredient");
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         Intent receivedIntent = getIntent();
         if (receivedIntent != null) {
             ingredient = (IIngredient) receivedIntent.getSerializableExtra("ingredient");
@@ -56,7 +62,7 @@ public class RecipeIngredientForm extends AppCompatActivity {
             withGuideAndAmount temp = new withGuideAndAmount(ingredient, ingredientGuide.getText().toString(), Integer.parseInt(ingredientAmount.getText().toString()));
             ingredients.add(temp);
             intent.putExtra("recipeIngredients", ingredients);
-            startActivity(intent);
+            setResult(RESULT_OK, intent);
             finish();
         }
     }
@@ -68,5 +74,9 @@ public class RecipeIngredientForm extends AppCompatActivity {
      }
         return true;
     }
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 }
