@@ -77,4 +77,9 @@ public class IngredientListActivity extends AppCompatActivity implements IObserv
         finish();
         return true;
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        UserSingleton.getInstance().unregister(this);
+    }
 }

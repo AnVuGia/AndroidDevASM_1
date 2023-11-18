@@ -26,17 +26,18 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements IObserverUser {
 
     private static final String TAG = "MainActivity";
-    private  ArrayList<Recipe> recipes = UserSingleton.getInstance().getRecipes();
-    private ArrayList<IIngredient> ingredients = UserSingleton.getInstance().getIngredients();
+    private  ArrayList<Recipe> recipes ;
+    private ArrayList<IIngredient> ingredients ;
     private LinearLayout recipe_container;
     private LinearLayout ingredient_container;
     private Button toRecipesList;
     private Button toIngredientsList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "onCreate: " + recipes.size());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+        recipes = UserSingleton.getInstance().getRecipes();
+        ingredients = UserSingleton.getInstance().getIngredients();
         toRecipesList = findViewById(R.id.to_recipe);
         toIngredientsList = findViewById(R.id.to_ingredient);
         toRecipesList.setBackgroundColor(getResources().getColor(R.color.add_recipe_button));
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements IObserverUser {
         toRecipesList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddRecipeActivity.class);
+                Intent intent = new Intent(MainActivity.this, RecipeListActivity.class);
                 startActivity(intent);
             }
         });
@@ -90,8 +91,6 @@ public class MainActivity extends AppCompatActivity implements IObserverUser {
         recipes = UserSingleton.getInstance().getRecipes();
         ingredients = UserSingleton.getInstance().getIngredients();
         renderView(recipes, ingredients);
-        Log.d(TAG, "update: " + recipes.size());
-        Log.d(TAG, "update: " + ingredients.size());
     }
     private void renderView(ArrayList<Recipe> recipes, ArrayList<IIngredient> ingredients) {
         renderRecipeViews(recipes);

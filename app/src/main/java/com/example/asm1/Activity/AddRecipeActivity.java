@@ -35,14 +35,11 @@ import java.util.ArrayList;
 
 public class AddRecipeActivity extends AppCompatActivity {
     private static final String TAG = "AddRecipeActivity";
-    private ArrayList<Recipe> recipes = UserSingleton.getInstance().getRecipes();
-    private ArrayList<IIngredient> ingredients = UserSingleton.getInstance().getIngredients();
+    private final ArrayList<IIngredient> ingredients = UserSingleton.getInstance().getIngredients();
     private ArrayList<withGuideAndAmount> recipeIngredients = new ArrayList<>();
-    private ArrayList<String> ingredientNames = new ArrayList<>();
+    private final ArrayList<String> ingredientNames = new ArrayList<>();
     private Spinner ingredientSpinner;
-    private Button toIngredientForm, addRecipe;
     private LinearLayout recipe_ingredient_container;
-    private ImageButton breakfast_button, lunch_button, dinner_button;
     private ButtonsChangeHelper buttonsChangeHelper;
     private EditText recipe_name_input;
 
@@ -56,24 +53,26 @@ public class AddRecipeActivity extends AppCompatActivity {
             actionBar.setTitle("Add Recipe");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        //populate data
         ingredientSpinner = findViewById(R.id.ingredient_spinner);
-        toIngredientForm = findViewById(R.id.to_ingerdient_form);
+        Button toIngredientForm = findViewById(R.id.to_ingerdient_form);
         recipe_ingredient_container = findViewById(R.id.recipe_ingredient_container);
-        breakfast_button = findViewById(R.id.breakfast_btn);
-        lunch_button = findViewById(R.id.lunch_btn);
-        dinner_button = findViewById(R.id.dinner_btn);
         recipe_name_input = findViewById(R.id.recipe_name_input);
+        renderSpinner();
+        //render buttons
+        ImageButton breakfast_button = findViewById(R.id.breakfast_btn);
+        ImageButton lunch_button = findViewById(R.id.lunch_btn);
+        ImageButton dinner_button = findViewById(R.id.dinner_btn);
         buttonsChangeHelper = new ButtonsChangeHelper(breakfast_button, lunch_button, dinner_button);
-        addRecipe = findViewById(R.id.add_recipe_button);
+        Button addRecipe = findViewById(R.id.add_recipe_button);
+        //set on click
         addRecipe.setOnClickListener(v -> onAddRecipe());
+        //map ingredient to spinner
         for(IIngredient ingredient : ingredients) {
             ingredientNames.add(ingredient.getName());
         }
-        String[] ingredientNamesArray = ingredientNames.toArray(new String[0]);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ingredientNamesArray);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ingredientSpinner.setAdapter(adapter);
         toIngredientForm.setOnClickListener(v -> setToIngredientForm());
+        //check if there is data
         Intent receivedIntent = getIntent();
         if (receivedIntent.getExtras() != null) {
             recipeIngredients = (ArrayList<withGuideAndAmount>) receivedIntent.getSerializableExtra("recipeIngredients");
@@ -158,6 +157,13 @@ public class AddRecipeActivity extends AppCompatActivity {
         }
         return true;
     }
+    private void renderSpinner() {
+        String[] ingredientNamesArray = ingredientNames.toArray(new String[0]);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ingredientNamesArray);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ingredientSpinner.setAdapter(adapter);
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         finish();
