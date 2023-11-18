@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.AddIngredientActivity">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="165dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="388dp"
+        android:text="Calories:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="168dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="500dp"
+        android:text="Description:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="164dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="256dp"
+        android:text="Name:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/add_ingri_desc"
+        android:layout_width="355dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="68dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/add_ingre_calo"
+        app:layout_constraintTop_toBottomOf="@+id/add_ingre_calo" />
+
+    <EditText
+        android:id="@+id/add_ingre_calo"
+        android:layout_width="359dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/add_ingri_name"
+        app:layout_constraintTop_toBottomOf="@+id/add_ingri_name" />
+
+    <EditText
+        android:id="@+id/add_ingri_name"
+        android:layout_width="359dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="308dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/add_ingredient_button"
+        android:layout_width="347dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Add ingredient"
+        app:layout_constraintStart_toStartOf="@+id/add_ingri_desc"
+        app:layout_constraintTop_toBottomOf="@+id/add_ingri_desc" />
+
+    <ImageButton
+        android:id="@+id/meat_button"
+        android:layout_width="113dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/button_border"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/flour_button"
+        app:layout_constraintTop_toTopOf="@+id/flour_button"
+        app:srcCompat="@drawable/meat" />
+
+    <ImageButton
+        android:id="@+id/vegetable_button"
+        android:layout_width="113dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/button_border"
+
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/meat_button"
+        app:layout_constraintTop_toTopOf="@+id/meat_button"
+        app:srcCompat="@drawable/vegetable" />
+
+    <ImageButton
+        android:id="@+id/flour_button"
+        android:layout_width="113dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="128dp"
+        android:background="@drawable/button_border"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/flour" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="169dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="60dp"
+        android:text="Type:"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,12 @@
+<resources>
+
+    <style name="Widget.Theme.Asm1.MyView" parent="">
+        <item name="android:background">@color/gray_600</item>
+        <item name="exampleColor">@color/light_blue_600</item>
+    </style>
+    <style name="ToggleButtonWithImageStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+</resources>

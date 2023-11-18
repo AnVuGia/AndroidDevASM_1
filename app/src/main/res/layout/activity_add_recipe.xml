@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.AddRecipeActivity">
+
+    <ImageButton
+        android:id="@+id/lunch_btn"
+        android:layout_width="116dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="15dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/breakfast_btn"
+        app:layout_constraintTop_toTopOf="@+id/breakfast_btn"
+        app:srcCompat="@drawable/lunch" />
+
+    <ImageButton
+        android:id="@+id/dinner_btn"
+        android:layout_width="116dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/lunch_btn"
+        app:layout_constraintTop_toTopOf="@+id/lunch_btn"
+        app:srcCompat="@drawable/dinner" />
+
+    <ImageButton
+        android:id="@+id/breakfast_btn"
+        android:layout_width="116dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="128dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/breakfast" />
+
+    <EditText
+        android:id="@+id/recipe_name_input"
+        android:layout_width="252dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="256dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="390dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="56dp"
+        android:background="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_name_input">
+
+        <LinearLayout
+            android:id="@+id/recipe_ingredient_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <Spinner
+        android:id="@+id/ingredient_spinner"
+        android:layout_width="383dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <Button
+        android:id="@+id/to_ingerdient_form"
+        android:layout_width="172dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="96dp"
+        android:text="add ingredient"
+        app:layout_constraintStart_toStartOf="@+id/scrollView2"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <Button
+        android:id="@+id/add_recipe_button"
+        android:layout_width="154dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="4dp"
+        android:text="ADD recipe"
+        app:layout_constraintStart_toEndOf="@+id/to_ingerdient_form"
+        app:layout_constraintTop_toTopOf="@+id/to_ingerdient_form" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="118dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="5dp"
+        android:text="Name:"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/recipe_name_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/recipe_name_input" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="130dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="3dp"
+        android:text="Type"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/breakfast_btn"
+        app:layout_constraintStart_toStartOf="@+id/breakfast_btn" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="138dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="4dp"
+        android:text="Ingredient"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
